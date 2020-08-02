@@ -69,7 +69,7 @@ describe('GET /todos', () => {
   })
 });
 
-// describe('GET /todos/id', () => {
+// describe('GET /todos/:id', () => {
 //   it('should return todo doc', (done) => {
 //     request(app)
 //     .get(`/todos/${todos[0]._id.toHexString()}`)
@@ -80,3 +80,25 @@ describe('GET /todos', () => {
 //     .end(done);
 //   })
 // });
+
+
+
+  describe('GET /todos/:id', () => {
+    it('should return 404 if todo not found' , (done) => {
+      var hexId = new ObjectID().toHexString();
+      request(app)
+      .get(`/todos/${hexId}`)
+        .expect(404)
+      .end(done);
+    });
+  });
+
+  describe('GET /todos/:id', () => {
+    it('should return 404 if todo not found' , (done) => {
+      request(app)
+      .get(`/todos/123abc`)
+        .expect(404)
+       
+      .end(done);
+    });
+  });
